@@ -1,0 +1,49 @@
+---
+title: "ANA 515 - Assignment 2"
+author: "Eduardo Dischinger"
+date: '2022-09-17'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include=TRUE}
+#Section 1 - The dataset is about professional tennis players and the amount of time they add or subtract by point to the match lenght. The data was collected from a repository created by analyst/statistician Jeff Sackmann, who posted to Github the tennis stats of the last 25 years. Then it was measured the avreage lenght of points in a professional tennis match; the dataset contains data about 219 tennis players and the average time they add or subtract to a tennis points in comparison with the avreage tennis point lenght. The data is in a CSV file
+```
+
+```{r, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/tennis-time/players_time.csv"
+tennis <- read.csv(url)
+#Using read.csv(url) I was able to read the dataset into R
+```
+
+```{r, include = FALSE}
+library("dplyr")
+```
+
+```{r, echo=TRUE}
+
+rename(tennis, time =seconds_added_per_point)
+```
+
+This dataframe has `r nrow(tennis)` rows and `r ncol(tennis)` columns. The names of the columns and a brief description of each are in the table below:
+
+```{r}
+text_tbl <- data.frame(
+Names = c("player","seconds_added_per_point"),
+Description = c("pro tennis player for column 1","time they add or subtract for the average lenght of a tennis point for column2")
+)
+text_tbl
+```
+
+
+```{r, echo=TRUE}
+data_pick <-select(tennis, seconds_added_per_point)
+
+```
+
+```{r, include=TRUE}
+summarytable<- summary(data_pick)
+print(summarytable)
+```
